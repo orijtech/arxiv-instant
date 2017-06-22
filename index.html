@@ -1,0 +1,27 @@
+<HTML>
+  <head>
+    <script type="text/javascript" src="https://storage.googleapis.com/realsp/rsp.min.js"></script>
+  </head>
+
+  <body>
+    <input id="searchInput"></input>
+    <br />
+    <div id="contentHere">
+    </div>
+
+    <script>
+      var outputEl = document.getElementById("contentHere");
+      var resp = new Resp({
+	"apiKey": "5d94890f-e04e-4012-9b7f-027d487d4a8b",
+	"itemId": "searchInput",
+	"services": {"arxiv": {"only_processed_html": true}},
+	"onMessage": function onData(data) {
+	  data.results.forEach(function(datum) {
+	    if (datum.service === 'arxiv')
+		outputEl.innerHTML = datum.processed_html;
+	  });
+	}
+      });
+    </script>
+  </body>
+</HTML>
